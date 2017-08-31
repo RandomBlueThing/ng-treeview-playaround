@@ -26,6 +26,46 @@ namespace NgRule.Controllers
             });
         }
 
+        [HttpGet("[action]")]
+        public IEnumerable<Menu> MenuData()
+        {
+            return new[] {
+                new Menu("one")
+                {
+                    Children = new List<Menu>()
+                    {
+                        new Menu("one.01"),
+                        new Menu("one.02"),
+                    }
+                },
+                new Menu("two")
+                {
+                    Children = new List<Menu>()
+                    {
+                        new Menu("two.01"),
+                        new Menu("two.02"),
+                    }
+                }
+            };
+        }
+
+        public class Menu
+        {
+            public Menu()
+            {
+            }
+
+
+            public Menu(string title)
+            {
+                Title = title;
+            }
+
+
+            public string Title { get; set; }
+            public List<Menu> Children { get; set; }
+        }
+
         public class WeatherForecast
         {
             public string DateFormatted { get; set; }

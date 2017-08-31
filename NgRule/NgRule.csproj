@@ -20,6 +20,17 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ClientApp\app\components\tree-view\tree-view.component.ts" />
+    <None Remove="ClientApp\app\services\project-role.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\tree-view\tree-view.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\tree-view\tree-view.directory.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\project-role.service.ts" />
+  </ItemGroup>
+
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

@@ -1,0 +1,20 @@
+﻿<ul class="sidebar-menu">
+    <li class="treeview" *ngFor="let parentNode of menuList">
+        <a>
+            <span> {{ parentNode.title }}</span>
+            <i *ngIf="parentNode.children && parentNode.children.length > 0" class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li *ngFor="let childNode of parentNode.children">
+                <a>
+                    <span>{{childNode.title}}</span>
+                    <i *ngIf="childNode.children && childNode.children.length > 0" class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <div *ngIf="childNode.children && childNode.children.length > 0" class="treeview-menu">
+                    <tree-view [menuList]="childNode.children"></tree-view>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
