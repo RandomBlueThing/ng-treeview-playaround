@@ -35,7 +35,20 @@ namespace NgRule.Controllers
                     Children = new List<Menu>()
                     {
                         new Menu("one.01"),
-                        new Menu("one.02"),
+                        new Menu("one.02")
+                        {
+                            Children = new List<Menu>()
+                            {
+                                new Menu("one.02.01")
+                                {
+                                    Children = new List<Menu>()
+                                    {
+                                        new Menu("one.02.01.01")
+                                    }
+                                },
+                                new Menu("one.02.02"),
+                            }
+                        }
                     }
                 },
                 new Menu("two")
