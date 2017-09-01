@@ -10,7 +10,7 @@ export class ProjectRoleService {
         @Inject('BASE_URL') private _baseUrl: string) {
     }
 
-    getMenuDetails(roleName: string) {
+    getMenuDetails() {
 
         return new Promise((resolve, reject) => {
             this._http.get(this._baseUrl + 'api/SampleData/MenuData')
@@ -20,7 +20,6 @@ export class ProjectRoleService {
                     reject(error);
                     return Observable.throw(error.json().error || 'Server error');
                 })
-
                 .subscribe((data) => {
                     resolve(data);
                 });

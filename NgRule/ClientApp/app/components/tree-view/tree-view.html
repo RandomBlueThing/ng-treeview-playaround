@@ -1,21 +1,21 @@
-﻿<ul class="sidebar-menu">
-    <li class="treeview" *ngFor="let parentNode of menuList">
+﻿start
+<ul>
+    <li *ngFor="let parentNode of menuList">
         <div>
             <span> {{ parentNode.title }}</span>
-            <i *ngIf="parentNode.children && parentNode.children.length > 0" class="fa fa-angle-left pull-right"></i>
-            XXX
+			(p)
         </div>
-        <ul class="treeview-menu">
+        <ul>
             <li *ngFor="let childNode of parentNode.children">
                 <div>
                     <span>{{childNode.title}}</span>
-                    <i *ngIf="childNode.children && childNode.children.length > 0" class="fa fa-angle-left pull-right"></i>
+					(c)
                 </div>
-                YYY
-                <div *ngIf="childNode.children && childNode.children.length > 0" class="treeview-menu">
+                <div *ngIf="childNode.children && childNode.children.length > 0">
                     <tree-view [menuList]="childNode.children"></tree-view>
                 </div>
             </li>
         </ul>
     </li>
 </ul>
+end

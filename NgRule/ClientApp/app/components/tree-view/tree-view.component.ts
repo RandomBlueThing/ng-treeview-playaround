@@ -4,21 +4,20 @@ import { ProjectRoleService } from '../../services/project-role.service';
 
 @Component({
     selector: 'tree-view-menu',
-    template: '<tree-view [menuList]="menuList"></tree-view>'
+    template: '<tree-view [menuList]="_menuList"></tree-view>'
 })
 export class TreeViewComponent {
-    public roleName: string;
-    menuList: any;
+
+	_menuList: any;
 
     constructor(private _projectService: ProjectRoleService) {
     }
 
     ngOnInit() {
-        this.roleName = "Admin";
-        this._projectService.getMenuDetails(this.roleName).then((res: any) => {
-            this.menuList = res;
+		this._projectService.getMenuDetails().then((res: any) => {
+            this._menuList = res;
         }, (error) => {
             console.log("Failed to get Treeview menu details", error._body, "error");
         });
     }
-}  
+}
