@@ -1,17 +1,31 @@
 ﻿<div *ngIf="expression && expression.isActive">
+
+    <!-- Expression -->
     <div class="expression">
-        <input [(ngModel)]="expression.operator">
-        <a (click)="deleteExpression()">X</a>
+        <select *ngIf="!isContainer" [(ngModel)]="expression.operand">
+            <option *ngFor="let op of operands" [value]="op">{{op}}</option>
+        </select>
+
+        <input *ngIf="!isContainer && expression.operand=='property'" [(ngModel)]="expression.argument">
+
+        <select [(ngModel)]="expression.operator">
+            <option *ngFor="let op of operators" [value]="op">{{op}}</option>
+        </select>
+
+        <input *ngIf="!isContainer" [(ngModel)]="expression.value">
+
+        <a class="link" (click)="deleteExpression()">del</a>
     </div>
 
-    <div class="expressions" *ngIf="expression.children && expression.children.length > 0">
+    <!-- Children -->
+    <div class="expressions" *ngIf="isContainer">
         <div *ngFor="let child of expression.children">
             <expression-view [expression]="child"></expression-view>
         </div>
-        <a (click)="addChild()">Add child...</a>
+        <a class="link" (click)="addChild()">Add child...</a>
     </div>
 </div>
 
 <div *ngIf="!expression">
-    <a>New expression</a>
+    <div>!! null expression  !!</div>
 </div>

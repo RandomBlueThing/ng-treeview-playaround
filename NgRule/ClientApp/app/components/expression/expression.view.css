@@ -1,7 +1,7 @@
 ﻿.expressions {
     background-color: lightblue;
-    margin: 5px;
-    padding: 5px;
+    margin: 5px 0 5px 10px;
+    padding: 0;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -9,5 +9,9 @@
 
 .expression {
     background-color: lightyellow;
-    padding: 5px;
+    padding: 5px 0 5px 10px;
+}
+
+.link{
+    cursor: pointer;
 }

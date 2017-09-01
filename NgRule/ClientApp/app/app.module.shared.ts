@@ -9,13 +9,14 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+
+import { ProjectRoleService } from './services/project-role.service'
+
 import { TreeView } from './components/tree-view/tree-view.directory';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
 
 import { Expression } from './components/expression/expression.view';
 import { ExpressionComponent } from './components/expression/expression.component';
-
-import { ProjectRoleService } from './services/project-role.service'
 
 @NgModule({
     declarations: [

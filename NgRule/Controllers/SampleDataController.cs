@@ -29,21 +29,21 @@ namespace NgRule.Controllers
         [HttpGet("[action]")]
         public Expression ExpressionData()
         {
-            return new Expression("root")
+            return new Expression("match_all")
             {
                 Children = new[]
                 {
-                    new Expression("root-01", "Category", null, "info"),
-                    new Expression("root-02", "Summary", null, "test"),
-                    new Expression("root-03")
+                    new Expression("eq", "category", null, "info"),
+                    new Expression("eq", "summary", null, "test"),
+                    new Expression("match_any")
                     {
                         Children = new[]
                         {
-                            new Expression("root-03.01"),
-                            new Expression("root-03.02"),
+                            new Expression("eq", "property", "prop-one", "1"),
+                            new Expression("eq", "property", "prop-two", "2")
                         }
                     },
-                    new Expression("root-04", "Summary", null, "test")
+                    new Expression("eq", "property", "prop-three", "3")
                 }
             };
         }
