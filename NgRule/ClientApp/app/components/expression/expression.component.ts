@@ -20,4 +20,12 @@ export class ExpressionComponent {
             console.log("Failed to get expression details", error._body, "error");
         });
     }
+
+    save() {
+        this._projectService.saveExpression(this._expression)
+            .then(() => console.log("saved"),
+            (e) => { console.log("failed", e._body, "error") }
+        );
+        
+    }
 }

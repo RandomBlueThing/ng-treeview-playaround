@@ -1,13 +1,25 @@
 ﻿import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/Rx';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ProjectRoleService {
+    headers: Headers;
+    options: RequestOptions;
+
+
     constructor(
         private _http: Http,
         @Inject('BASE_URL') private _baseUrl: string) {
+
+        this.headers = new Headers({
+            'Content-Type': 'application/json',
+            'Accept': 'q=0.8;application/json;q=0.9'
+        });
+
+        this.options = new RequestOptions({ headers: this.headers });
     }
 
 
@@ -44,4 +56,11 @@ export class ProjectRoleService {
         });
     }
 
+
+    saveExpression(expression: any) {
+        let body = JSON.stringify(expression);
+        return this._http
+            .post(this._baseUrl + 'api/SampleData/ExpressionData', body, this.options)
+            .toPromise();
+    }  
 }  

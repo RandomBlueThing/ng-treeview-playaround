@@ -48,6 +48,12 @@ namespace NgRule.Controllers
             };
         }
 
+        [HttpPost("[action]")]
+        public void ExpressionData([FromBody] Expression expression)
+        {
+
+        }
+
         [HttpGet("[action]")]
         public IEnumerable<Menu> MenuData()
         {
