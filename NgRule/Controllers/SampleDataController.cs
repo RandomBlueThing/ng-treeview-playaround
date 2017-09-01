@@ -134,12 +134,14 @@ namespace NgRule.Controllers
                 Operand = operand;
                 Argument = arg;
                 Value = value;
+                IsActive = true;
             }
 
             public string Operator { get; set; }
             public string Operand { get; set; }
             public string Argument { get; set; }
             public string Value { get; set; }
+            public bool IsActive { get; set; }
 
             public Expression[] Children { get; set; }
         }

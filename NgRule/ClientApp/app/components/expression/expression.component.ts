@@ -1,10 +1,10 @@
 ﻿import { Component } from '@angular/core';
-import { Expression } from './expression';
+import { Expression } from './expression.view';
 import { ProjectRoleService } from '../../services/project-role.service';
 
 @Component({
     selector: 'expressions',
-    template: '<expression-view [expression]="_expression"></expression-view>'
+    templateUrl: './expression.component.html'
 })
 export class ExpressionComponent {
 

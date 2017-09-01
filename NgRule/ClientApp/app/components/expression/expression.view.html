@@ -1,11 +1,14 @@
-﻿<div *ngIf="expression">
-    <div class="expression">{{expression.operator}}</div>
+﻿<div *ngIf="expression && expression.isActive">
+    <div class="expression">
+        <input [(ngModel)]="expression.operator">
+        <a (click)="deleteExpression()">X</a>
+    </div>
 
     <div class="expressions" *ngIf="expression.children && expression.children.length > 0">
         <div *ngFor="let child of expression.children">
             <expression-view [expression]="child"></expression-view>
         </div>
-        <a>Add child...</a>
+        <a (click)="addChild()">Add child...</a>
     </div>
 </div>
 

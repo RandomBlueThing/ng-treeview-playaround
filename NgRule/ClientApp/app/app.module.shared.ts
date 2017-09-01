@@ -12,7 +12,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { TreeView } from './components/tree-view/tree-view.directory';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
 
-import { Expression } from './components/expression/expression';
+import { Expression } from './components/expression/expression.view';
 import { ExpressionComponent } from './components/expression/expression.component';
 
 import { ProjectRoleService } from './services/project-role.service'
