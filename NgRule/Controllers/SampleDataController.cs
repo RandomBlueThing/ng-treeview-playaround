@@ -27,6 +27,28 @@ namespace NgRule.Controllers
         }
 
         [HttpGet("[action]")]
+        public Expression ExpressionData()
+        {
+            return new Expression("root")
+            {
+                Children = new[]
+                {
+                    new Expression("root-01", "Category", null, "info"),
+                    new Expression("root-02", "Summary", null, "test"),
+                    new Expression("root-03")
+                    {
+                        Children = new[]
+                        {
+                            new Expression("root-03.01"),
+                            new Expression("root-03.02"),
+                        }
+                    },
+                    new Expression("root-04", "Summary", null, "test")
+                }
+            };
+        }
+
+        [HttpGet("[action]")]
         public IEnumerable<Menu> MenuData()
         {
             return new[] {
@@ -92,6 +114,34 @@ namespace NgRule.Controllers
                     return 32 + (int)(TemperatureC / 0.5556);
                 }
             }
+        }
+
+        public class Expression
+        {
+            public Expression()
+            {
+            }
+
+            public Expression(string op)
+                : this(op, null, null, null)
+            {
+            }
+
+            public Expression(string op, string operand, string arg, string value)
+                : this()
+            {
+                Operator = op;
+                Operand = operand;
+                Argument = arg;
+                Value = value;
+            }
+
+            public string Operator { get; set; }
+            public string Operand { get; set; }
+            public string Argument { get; set; }
+            public string Value { get; set; }
+
+            public Expression[] Children { get; set; }
         }
     }
 }

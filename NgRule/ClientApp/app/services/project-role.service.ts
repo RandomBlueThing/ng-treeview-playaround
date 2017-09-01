@@ -10,6 +10,7 @@ export class ProjectRoleService {
         @Inject('BASE_URL') private _baseUrl: string) {
     }
 
+
     getMenuDetails() {
 
         return new Promise((resolve, reject) => {
@@ -25,4 +26,22 @@ export class ProjectRoleService {
                 });
         });
     }
+
+
+    getExpression() {
+
+        return new Promise((resolve, reject) => {
+            this._http.get(this._baseUrl + 'api/SampleData/ExpressionData')
+                .map(res => res.json())
+                .catch((error: any) => {
+                    console.error(error);
+                    reject(error);
+                    return Observable.throw(error.json().error || 'Server error');
+                })
+                .subscribe((data) => {
+                    resolve(data);
+                });
+        });
+    }
+
 }  

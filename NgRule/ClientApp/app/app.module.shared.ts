@@ -11,6 +11,10 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { TreeView } from './components/tree-view/tree-view.directory';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
+
+import { Expression } from './components/expression/expression';
+import { ExpressionComponent } from './components/expression/expression.component';
+
 import { ProjectRoleService } from './services/project-role.service'
 
 @NgModule({
@@ -20,7 +24,8 @@ import { ProjectRoleService } from './services/project-role.service'
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        TreeViewComponent, TreeView
+        TreeViewComponent, TreeView,
+        ExpressionComponent, Expression
     ],
     imports: [
         CommonModule,
@@ -32,6 +37,7 @@ import { ProjectRoleService } from './services/project-role.service'
             //{ path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'tree-view-menu', component: TreeViewComponent },
+            { path: 'expressions', component: ExpressionComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
