@@ -5,5 +5,10 @@
         <div *ngFor="let child of expression.children">
             <expression-view [expression]="child"></expression-view>
         </div>
+        <a>Add child...</a>
     </div>
+</div>
+
+<div *ngIf="!expression">
+    <a>New expression</a>
 </div>

@@ -3,7 +3,7 @@
 @Component({
     selector: 'expression-view',
     templateUrl: './expression.html',
-    styles: ['./expression.css']
+    styleUrls: ['./expression.css']
 })
 export class Expression {
     @Input() expression: any;
