@@ -1,4 +1,10 @@
-﻿<expression-view [expression]="_expression"></expression-view>
-<button (click)="save()">save</button>
+﻿<div *ngIf="!_expression || !_expression.isActive; else empty">
+	<a class="link new-group" (click)="addNew()">Add an expression</a>
+</div>
+<ng-template #empty>
+	<expression-view [expression]="_expression" [isRoot]="true"></expression-view>
+	<button (click)="save()">save</button>
+</ng-template>
 <hr/>
+<div><button (click)="clear()">clear</button></div>
 <div><pre><small>{{_expression | json}}</small></pre></div>

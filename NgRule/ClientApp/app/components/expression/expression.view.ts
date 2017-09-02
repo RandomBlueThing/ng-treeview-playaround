@@ -6,7 +6,10 @@
     styleUrls: ['./expression.view.css']
 })
 export class Expression {
-    @Input() expression: any;
+	@Input() expression: any;
+	@Input() isRoot: boolean;
+
+	isMouseOverDelete: boolean;
 
     addChild() {
         if (!this.expression.children) {
@@ -23,19 +26,46 @@ export class Expression {
         });
     }
 
+	addGroup() {
+		if (!this.expression.children) {
+			this.expression.children = [];
+		}
 
-    operators: Array<string> = [
-        "match_all",
-        "match_any",
+		this.expression.children.push({
+			operator: "match_all",
+			operand: "",
+			argument: "",
+			value: "",
+			isActive: true,
+			children: []
+		});
+	}
+
+	delMouseEnter() {
+		this.isMouseOverDelete = true;
+	}
+
+	delMouseLeave() {
+		this.isMouseOverDelete = false;
+	}
+
+    expressionOperators: Array<string> = [
         "eq",
-        "not-eq"
+		"not-eq",
+		"regex"
     ];
 
+	groupOperators: Array<string> = [
+		"match_all",
+		"match_any"
+	];
+
+
     operands: Array<string> = [
-        "category",
-        "summary",
-        "source",
-        "property"
+        "Category",
+        "Summary",
+        "Source",
+        "Property"
     ];
 
     // We don't actually delete stuff, just mark as inactive. We can let the server actually delete stuff if it
@@ -49,5 +79,10 @@ export class Expression {
     get isContainer(): boolean {
         return this.expression.operator.toUpperCase() === "MATCH_ALL"
             || this.expression.operator.toUpperCase() === "MATCH_ANY";
-    }
+	}
+
+
+	get isActive(): boolean {
+		return this.expression.isActive;
+	}
 }

@@ -1,17 +1,56 @@
-﻿.expressions {
-    background-color: lightblue;
-    margin: 5px 0 5px 10px;
-    padding: 0;
-    border: 1px;
-    border-style: solid;
-    border-color: black;
+﻿.group-expression {
+	border-width: 1px;
+	padding: 0;
+	border-left: 5px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+}
+
+
+.indent {
+	margin-left: 30px;
 }
 
 .expression {
-    background-color: lightyellow;
-    padding: 5px 0 5px 10px;
+	border-width: 1px;
+	padding: 0;
+	margin-left: 30px;
+	margin-bottom: 2px;
+	padding-top: 1px;
+	padding-left: 1px;
+	padding-bottom: 1px;
+	padding-right: 1px;
 }
+
 
 .link{
     cursor: pointer;
+}
+
+@keyframes highlightExpressionAnimation {
+	to {
+		background-color: red;
+	}
+}
+
+.highlightExpression {
+	animation-name: highlightExpressionAnimation;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+
+
+.delete{
+	float: right;
+}
+
+.delete:hover {
+	background-color: aqua;
+}
+
+.new-group{
+
+}
+
+.new-expression {
+	margin-left: 30px;
 }

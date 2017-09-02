@@ -21,6 +21,30 @@ export class ExpressionComponent {
         });
     }
 
+	clear() {
+		this._expression = null;
+	}
+
+	addNew() {
+		this._expression = {
+			operator: "match_all",
+			operand: "",
+			argument: "",
+			value: "",
+			isActive: true,
+			children: [
+				{
+					operator: "eq",
+					operand: "Category",
+					argument: "",
+					value: "information",
+					isActive: true,
+					children: []
+				}
+			]
+		};
+	}
+
     save() {
         this._projectService.saveExpression(this._expression)
             .then(() => console.log("saved"),

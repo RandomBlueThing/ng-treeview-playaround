@@ -1,29 +1,40 @@
 ﻿<div *ngIf="expression && expression.isActive">
 
     <!-- Expression -->
-    <div class="expression">
-        <select *ngIf="!isContainer" [(ngModel)]="expression.operand">
-            <option *ngFor="let op of operands" [value]="op">{{op}}</option>
-        </select>
+    <div class="expression" [class.highlightExpression]="isMouseOverDelete">
+		<span *ngIf="!isContainer">
+			<select [(ngModel)]="expression.operand">
+				<option *ngFor="let op of operands" [value]="op">{{op}}</option>
+			</select>
 
-        <input *ngIf="!isContainer && expression.operand=='property'" [(ngModel)]="expression.argument">
+			<input *ngIf="expression.operand=='property'" [(ngModel)]="expression.argument">
+		</span>
 
-        <select [(ngModel)]="expression.operator">
-            <option *ngFor="let op of operators" [value]="op">{{op}}</option>
-        </select>
+		<span *ngIf="isContainer">
+			<select [(ngModel)]="expression.operator">
+				<option *ngFor="let op of groupOperators" [value]="op">{{op}}</option>
+			</select>
+
+			<a class="link new-group" (click)="addGroup()">[new group]</a>
+		</span>
+
+		<select *ngIf="!isContainer" [(ngModel)]="expression.operator">
+			<option *ngFor="let op of expressionOperators" [value]="op">{{op}}</option>
+		</select>
 
         <input *ngIf="!isContainer" [(ngModel)]="expression.value">
 
-        <a class="link" (click)="deleteExpression()">del</a>
+        <div *ngIf="!isRoot" class="link delete" (mouseenter)="delMouseEnter()" (mouseleave)="delMouseLeave()" (click)="deleteExpression()">del</div>
+
+		<!-- Children -->
+		<div *ngIf="isContainer" class="group-expression">
+			<div *ngFor="let child of expression.children">
+				<expression-view [expression]="child" [isRoot]="false"></expression-view>
+			</div>
+			<a class="link new-expression" (click)="addChild()">+</a>
+		</div>
     </div>
 
-    <!-- Children -->
-    <div class="expressions" *ngIf="isContainer">
-        <div *ngFor="let child of expression.children">
-            <expression-view [expression]="child"></expression-view>
-        </div>
-        <a class="link" (click)="addChild()">Add child...</a>
-    </div>
 </div>
 
 <div *ngIf="!expression">
