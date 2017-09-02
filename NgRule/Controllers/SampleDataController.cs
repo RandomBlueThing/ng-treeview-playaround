@@ -14,16 +14,34 @@ namespace NgRule.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+
+
+		[HttpGet("[action]/{id}")]
+		public Rule GetRule(string id)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+			Task.Delay(2000).Wait();
+
+			return new Rule()
+			{
+				Id = id,
+				Expression = new Expression("match_all")
+				{
+					Children = new[]
+					{
+						new Expression("eq", "Category", null, "info"),
+						new Expression("eq", "Summary", null, "test"),
+						new Expression("match_any")
+						{
+							Children = new[]
+							{
+								new Expression("eq", "Property", "prop-one", "1"),
+								new Expression("eq", "Property", "prop-two", "2")
+							}
+						},
+						new Expression("eq", "Property", "prop-three", "3")
+					}
+				}
+			};
         }
 
         [HttpGet("[action]")]
@@ -33,17 +51,17 @@ namespace NgRule.Controllers
             {
                 Children = new[]
                 {
-                    new Expression("eq", "category", null, "info"),
-                    new Expression("eq", "summary", null, "test"),
+                    new Expression("eq", "Category", null, "info"),
+                    new Expression("eq", "Summary", null, "test"),
                     new Expression("match_any")
                     {
                         Children = new[]
                         {
-                            new Expression("eq", "property", "prop-one", "1"),
-                            new Expression("eq", "property", "prop-two", "2")
+                            new Expression("eq", "Property", "prop-one", "1"),
+                            new Expression("eq", "Property", "prop-two", "2")
                         }
                     },
-                    new Expression("eq", "property", "prop-three", "3")
+                    new Expression("eq", "Property", "prop-three", "3")
                 }
             };
         }
@@ -89,6 +107,12 @@ namespace NgRule.Controllers
                 }
             };
         }
+
+		public class Rule
+		{
+			public string Id { get; set; }
+			public Expression Expression { get; set; }
+		}
 
         public class Menu
         {

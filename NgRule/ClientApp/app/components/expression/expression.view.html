@@ -7,7 +7,7 @@
 				<option *ngFor="let op of operands" [value]="op">{{op}}</option>
 			</select>
 
-			<input *ngIf="expression.operand=='property'" [(ngModel)]="expression.argument">
+			<input *ngIf="expression.operand=='Property'" [(ngModel)]="expression.argument">
 		</span>
 
 		<span *ngIf="isContainer">

@@ -18,6 +18,8 @@ import { TreeViewComponent } from './components/tree-view/tree-view.component';
 import { Expression } from './components/expression/expression.view';
 import { ExpressionComponent } from './components/expression/expression.component';
 
+import { RuleComponent } from './components/rule/rule.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,7 +28,8 @@ import { ExpressionComponent } from './components/expression/expression.componen
         FetchDataComponent,
         HomeComponent,
         TreeViewComponent, TreeView,
-        ExpressionComponent, Expression
+		ExpressionComponent, Expression,
+		RuleComponent
     ],
     imports: [
         CommonModule,
@@ -39,6 +42,7 @@ import { ExpressionComponent } from './components/expression/expression.componen
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'tree-view-menu', component: TreeViewComponent },
             { path: 'expressions', component: ExpressionComponent },
+			{ path: 'rules', component: RuleComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

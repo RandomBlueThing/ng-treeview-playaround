@@ -1,0 +1,21 @@
+﻿<div *ngIf="_rule; else noRuleTemplate">
+	<div>
+		{{_rule.id}}
+	</div>
+	<div *ngIf="_rule.expression; else noExpressionTemplate">
+		<expression-view [expression]="_rule.expression" [isRoot]="true"></expression-view>
+	</div>
+</div>
+
+<ng-template #noRuleTemplate>Loading...</ng-template>
+<ng-template #noExpressionTemplate>
+	<div><a (click)="addNewExpression()">Add an expression</a>
+</div>
+</ng-template>
+
+<!-- Debug -->
+<div style="background-color:lightgoldenrodyellow">
+	<button (click)="clear()">clear</button>
+	<button (click)="clearExpression()">clear expression</button>
+	<div><pre><small>{{_rule | json}}</small></pre></div>
+</div>

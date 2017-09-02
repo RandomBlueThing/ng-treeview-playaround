@@ -40,6 +40,23 @@ export class ProjectRoleService {
     }
 
 
+	getRule(id: string) {
+
+		return new Promise((resolve, reject) => {
+			this._http.get(this._baseUrl + 'api/SampleData/GetRule/' + id)
+				.map(res => res.json())
+				.catch((error: any) => {
+					console.error(error);
+					reject(error);
+					return Observable.throw(error.json().error || 'Server error');
+				})
+				.subscribe((data) => {
+					resolve(data);
+				});
+		});
+	}
+
+
     getExpression() {
 
         return new Promise((resolve, reject) => {

@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\expression\expression.component.ts" />
+    <None Remove="ClientApp\app\components\rule\rule.component.ts" />
     <None Remove="ClientApp\app\components\tree-view\tree-view.component.ts" />
     <None Remove="ClientApp\app\services\project-role.service.ts" />
   </ItemGroup>
@@ -29,6 +30,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\expression\expression.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\expression\expression.view.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\rule\rule.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\tree-view\tree-view.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\tree-view\tree-view.directory.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\project-role.service.ts" />

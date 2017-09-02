@@ -1,7 +1,7 @@
-﻿<div *ngIf="!_expression || !_expression.isActive; else empty">
+﻿<div *ngIf="!_expression || !_expression.isActive; else has_content">
 	<a class="link new-group" (click)="addNew()">Add an expression</a>
 </div>
-<ng-template #empty>
+<ng-template #has_content>
 	<expression-view [expression]="_expression" [isRoot]="true"></expression-view>
 	<button (click)="save()">save</button>
 </ng-template>
