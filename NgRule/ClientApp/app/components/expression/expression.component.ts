@@ -1,55 +1,89 @@
-﻿import { Component } from '@angular/core';
-import { ExpressionView } from './expression.view';
-import { ProjectRoleService } from '../../services/project-role.service';
+﻿import { Component, Input } from '@angular/core';
+import { Expression } from '../../entities/entities';
 
 @Component({
-    selector: 'expressions',
-    templateUrl: './expression.component.html'
+    selector: 'expression-view',
+    templateUrl: './expression.component.html',
+    styleUrls: ['./expression.component.css']
 })
 export class ExpressionComponent {
+	@Input() expression: Expression;
+	@Input() isRoot: boolean;
 
-    _expression: any;
+	isMouseOverDelete: boolean;
 
-    constructor(private _projectService: ProjectRoleService) {
-    }
+    addChild() {
+        if (!this.expression.children) {
+            this.expression.children = [];
+        }
 
-    ngOnInit() {
-        this._projectService.getExpression().then((res: any) => {
-            this._expression = res;
-        }, (error) => {
-            console.log("Failed to get expression details", error._body, "error");
+        this.expression.children.push({
+            operator: "eq",
+            operand: "",
+            argument: "",
+            value: "",
+            isActive: true,
+            children: []
         });
     }
 
-	clear() {
-		this._expression = null;
-	}
+	addGroup() {
+		if (!this.expression.children) {
+			this.expression.children = [];
+		}
 
-	addNew() {
-		this._expression = {
+		this.expression.children.push({
 			operator: "match_all",
 			operand: "",
 			argument: "",
 			value: "",
 			isActive: true,
-			children: [
-				{
-					operator: "eq",
-					operand: "Category",
-					argument: "",
-					value: "information",
-					isActive: true,
-					children: []
-				}
-			]
-		};
+			children: []
+		});
 	}
 
-    save() {
-        this._projectService.saveExpression(this._expression)
-            .then(() => console.log("saved"),
-            (e) => { console.log("failed", e._body, "error") }
-        );
-        
-    }
+	delMouseEnter() {
+		this.isMouseOverDelete = true;
+	}
+
+	delMouseLeave() {
+		this.isMouseOverDelete = false;
+	}
+
+    expressionOperators: Array<string> = [
+        "eq",
+		"not-eq",
+		"regex"
+    ];
+
+	groupOperators: Array<string> = [
+		"match_all",
+		"match_any"
+	];
+
+
+    operands: Array<string> = [
+        "Category",
+        "Summary",
+        "Source",
+        "Property"
+    ];
+
+    // We don't actually delete stuff, just mark as inactive. We can let the server actually delete stuff if it
+    // wants to (if we deleted it here, the server wouldn't even have any way of knowing it had been deleted!)
+    deleteExpression() {
+        this.expression.isActive = false;        
+    };
+
+
+    // It's a container if the operand requires child exprssions
+    get isContainer(): boolean {
+        return this.expression.operator.toUpperCase() === "MATCH_ALL"
+            || this.expression.operator.toUpperCase() === "MATCH_ANY";
+	}
+
+
+	get isActive(): boolean {
+		return this.expression.isActive;
+	}
 }

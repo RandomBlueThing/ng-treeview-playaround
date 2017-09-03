@@ -8,12 +8,5 @@ import { ActionDefinition } from '../../entities/entities';
 })
 export class ActionDefinitionComponent {
 	@Input() action: ActionDefinition;
-
-
-	constructor() {
-	}
-
-	ngOnInit() {
-	}
 }
 
