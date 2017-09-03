@@ -8,7 +8,7 @@ import { ProjectRoleService } from '../../services/project-role.service';
 })
 export class RuleComponent {
 
-	_rule: any;
+	_rule?: Rule;
 
 	constructor(private _projectService: ProjectRoleService) {
 	}
@@ -25,12 +25,12 @@ export class RuleComponent {
 	}
 
 	clear() {
-		this._rule = null;
+		this._rule = undefined;
 	}
 
 	clearExpression() {
 		if (this._rule) {
-			this._rule.expression = null;
+			this._rule.expression = undefined;
 		}
 	}
 
@@ -62,4 +62,33 @@ export class RuleComponent {
 	//		(e) => { console.log("failed", e._body, "error") }
 	//		);
 	//}
+}
+
+interface Expression {
+	operator: string;
+	operand: string;
+	argument: string;
+	value: string;
+	isActive: boolean;
+	children: Expression[];
+}
+
+interface Property {
+	category: string;
+	name: string;
+	value: string;
+}
+
+interface ActionDefinition {
+	type: string;
+	properties?: Property[];
+}
+
+interface Rule {
+	id: string;
+	name: number;
+	temperatureF: number;
+	summary: string;
+	expression?: Expression;
+	actions?: ActionDefinition[];
 }

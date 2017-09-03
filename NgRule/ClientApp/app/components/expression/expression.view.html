@@ -15,7 +15,7 @@
 				<option *ngFor="let op of groupOperators" [value]="op">{{op}}</option>
 			</select>
 
-			<a class="link new-group" (click)="addGroup()">[new group]</a>
+			<i (click)="addGroup()" class="link new-group fa fa-plus-circle"></i>
 		</span>
 
 		<select *ngIf="!isContainer" [(ngModel)]="expression.operator">
@@ -24,14 +24,14 @@
 
         <input *ngIf="!isContainer" [(ngModel)]="expression.value">
 
-        <div *ngIf="!isRoot" class="link delete" (mouseenter)="delMouseEnter()" (mouseleave)="delMouseLeave()" (click)="deleteExpression()">del</div>
+        <div *ngIf="!isRoot" class="link delete" (mouseenter)="delMouseEnter()" (mouseleave)="delMouseLeave()" (click)="deleteExpression()"><i class="fa fa-trash-o"></i></div>
 
 		<!-- Children -->
 		<div *ngIf="isContainer" class="group-expression">
 			<div *ngFor="let child of expression.children">
 				<expression-view [expression]="child" [isRoot]="false"></expression-view>
 			</div>
-			<a class="link new-expression" (click)="addChild()">+</a>
+			<i (click)="addChild()" class="fa fa-plus link new-expression"></i>
 		</div>
     </div>
 

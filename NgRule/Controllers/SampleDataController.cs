@@ -40,6 +40,23 @@ namespace NgRule.Controllers
 						},
 						new Expression("eq", "Property", "prop-three", "3")
 					}
+				},
+				Actions = new[] 
+				{
+					new ActionDefinition("email")
+					{
+						Properties = new[]
+						{
+							new Property("to", "pj@theswamp.co.uk")
+						}
+					},
+					new ActionDefinition("change-category")
+					{
+						Properties = new[]
+						{
+							new Property("category", "Information")
+						}
+					}
 				}
 			};
         }
@@ -111,10 +128,51 @@ namespace NgRule.Controllers
 		public class Rule
 		{
 			public string Id { get; set; }
+			public string Name { get; set; }
 			public Expression Expression { get; set; }
+			public ActionDefinition[] Actions { get; set; }
 		}
 
-        public class Menu
+		public class ActionDefinition
+		{
+			public ActionDefinition()
+			{
+				IsActive = true;
+			}
+
+
+			public ActionDefinition(string type)
+				: this()
+			{
+				Type = type;
+			}
+
+			public string Type { get; set; }
+			public bool IsActive { get; set; }
+			public Property[] Properties { get; set; }
+		}
+
+
+		public class Property
+		{
+			public Property()
+			{
+			}
+
+			public Property(string name, string value)
+				: this()
+			{
+				Name = name;
+				Value = value;
+			}
+
+			public string Category { get; set; }
+			public string Name { get; set; }
+			public string Value { get; set; }
+		}
+
+
+		public class Menu
         {
             public Menu()
             {
