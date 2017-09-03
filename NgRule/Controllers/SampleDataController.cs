@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NgRule.Entities;
 
 namespace NgRule.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -126,113 +127,21 @@ namespace NgRule.Controllers
             };
         }
 
-		public class Rule
-		{
-			public string Id { get; set; }
-			public string Name { get; set; }
-			public Expression Expression { get; set; }
-			public ActionDefinition[] Actions { get; set; }
-		}
-
-		public class ActionDefinition
-		{
-			public ActionDefinition()
-			{
-				IsActive = true;
-			}
-
-
-			public ActionDefinition(string type)
-				: this()
-			{
-				Type = type;
-			}
-
-			public string Type { get; set; }
-			public bool IsActive { get; set; }
-			public Property[] Properties { get; set; }
-		}
-
-
-		public class Property
-		{
-			public Property()
-			{
-			}
-
-			public Property(string name, string value)
-				: this()
-			{
-				Name = name;
-				Value = value;
-			}
-
-			public string Category { get; set; }
-			public string Name { get; set; }
-			public string Value { get; set; }
-		}
-
-
-		public class Menu
-        {
-            public Menu()
-            {
-            }
-
-
-            public Menu(string title)
-            {
-                Title = title;
-            }
-
-
-            public string Title { get; set; }
-            public List<Menu> Children { get; set; }
-        }
-
-        public class WeatherForecast
-        {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
-        }
-
-        public class Expression
-        {
-            public Expression()
-            {
-            }
-
-            public Expression(string op)
-                : this(op, null, null, null)
-            {
-            }
-
-            public Expression(string op, string operand, string arg, string value)
-                : this()
-            {
-                Operator = op;
-                Operand = operand;
-                Argument = arg;
-                Value = value;
-                IsActive = true;
-            }
-
-            public string Operator { get; set; }
-            public string Operand { get; set; }
-            public string Argument { get; set; }
-            public string Value { get; set; }
-            public bool IsActive { get; set; }
-
-            public Expression[] Children { get; set; }
-        }
     }
+
+	public class WeatherForecast
+	{
+		public string DateFormatted { get; set; }
+		public int TemperatureC { get; set; }
+		public string Summary { get; set; }
+
+		public int TemperatureF
+		{
+			get
+			{
+				return 32 + (int)(TemperatureC / 0.5556);
+			}
+		}
+	}
+
 }
