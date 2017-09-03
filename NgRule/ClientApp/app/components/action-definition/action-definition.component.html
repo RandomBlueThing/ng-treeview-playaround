@@ -1,8 +1,7 @@
-﻿<div class="action">
+﻿<div *ngIf="action && action.isActive" class="action">
 	<div>
-		{{action.type}}
-		<div><i class="fa fa-trash-o"></i></div>
-		<span class="glyphicon glyphicon-trash"></span>
+		<span (click)="deleteAction()" class="delete glyphicon glyphicon-trash"></span>
+		<h4>{{action.type}}</h4>
 	</div>
 	<div *ngIf="action.properties">
 		<div *ngFor="let property of action.properties">

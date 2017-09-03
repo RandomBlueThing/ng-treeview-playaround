@@ -30,9 +30,6 @@
 	padding-right: 1px;
 }
 
-.link{
-    cursor: pointer;
-}
 
 @keyframes highlightExpressionAnimation {
 	to {
@@ -48,6 +45,7 @@
 
 
 .delete{
+	cursor: pointer;
 	float: right;
 }
 

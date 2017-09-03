@@ -17,6 +17,7 @@ export interface Property {
 export interface ActionDefinition {
 	type: string;
 	properties?: Property[];
+	isActive: boolean;
 }
 
 export interface Rule {

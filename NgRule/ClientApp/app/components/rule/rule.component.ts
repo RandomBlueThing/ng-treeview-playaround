@@ -64,7 +64,8 @@ export class RuleComponent {
 			}
 
 			this._rule.actions.push({
-				type: type
+				type: type,
+				isActive: true
 			});
 		}
 	}

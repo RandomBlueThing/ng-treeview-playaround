@@ -33,7 +33,7 @@ import { ActionDefinitionComponent } from './components/action-definition/action
     ],
     providers: [
         ProjectRoleService
-    ]
+	]
 })
 export class AppModuleShared {
 }

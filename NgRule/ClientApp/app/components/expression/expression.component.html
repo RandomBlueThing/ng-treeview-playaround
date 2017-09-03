@@ -15,7 +15,7 @@
 				<option *ngFor="let op of groupOperators" [value]="op">{{op}}</option>
 			</select>
 
-			<span (click)="addGroup()" class="glyphicon glyphicon-plus"></span>
+			<span (click)="addGroup()" class="link glyphicon glyphicon-plus"></span>
 		</span>
 
 		<select *ngIf="!isContainer" [(ngModel)]="expression.operator">
@@ -25,7 +25,7 @@
         <input *ngIf="!isContainer" [(ngModel)]="expression.value">
 
         <div *ngIf="!isRoot" class="link delete" (mouseenter)="delMouseEnter()" (mouseleave)="delMouseLeave()" (click)="deleteExpression()">
-			<span class="glyphicon glyphicon-trash"></span>
+			<span class="link glyphicon glyphicon-trash"></span>
 		</div>
 
 		<!-- Children -->
@@ -34,7 +34,7 @@
 				<expression-view [expression]="child" [isRoot]="false"></expression-view>
 			</div>
 
-			<span (click)="addChild()" class="indent glyphicon glyphicon-plus"></span>
+			<span (click)="addChild()" class="link indent glyphicon glyphicon-plus"></span>
 		</div>
     </div>
 

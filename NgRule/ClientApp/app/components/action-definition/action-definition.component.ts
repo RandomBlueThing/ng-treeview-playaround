@@ -8,5 +8,9 @@ import { ActionDefinition } from '../../entities/entities';
 })
 export class ActionDefinitionComponent {
 	@Input() action: ActionDefinition;
+
+	deleteAction() {
+		this.action.isActive = false;
+	}
 }
 
