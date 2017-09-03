@@ -1,7 +1,7 @@
 ﻿<div *ngIf="expression && expression.isActive">
 
     <!-- Expression -->
-    <div class="expression" [class.highlightExpression]="isMouseOverDelete">
+    <div [ngClass]="isRoot ? 'root-expression' : 'expression'" [class.highlightExpression]="isMouseOverDelete">
 		<span *ngIf="!isContainer">
 			<select [(ngModel)]="expression.operand">
 				<option *ngFor="let op of operands" [value]="op">{{op}}</option>
@@ -15,7 +15,7 @@
 				<option *ngFor="let op of groupOperators" [value]="op">{{op}}</option>
 			</select>
 
-			<i (click)="addGroup()" class="link new-group fa fa-plus-circle"></i>
+			<span (click)="addGroup()" class="glyphicon glyphicon-plus"></span>
 		</span>
 
 		<select *ngIf="!isContainer" [(ngModel)]="expression.operator">
@@ -24,14 +24,17 @@
 
         <input *ngIf="!isContainer" [(ngModel)]="expression.value">
 
-        <div *ngIf="!isRoot" class="link delete" (mouseenter)="delMouseEnter()" (mouseleave)="delMouseLeave()" (click)="deleteExpression()"><i class="fa fa-trash-o"></i></div>
+        <div *ngIf="!isRoot" class="link delete" (mouseenter)="delMouseEnter()" (mouseleave)="delMouseLeave()" (click)="deleteExpression()">
+			<span class="glyphicon glyphicon-trash"></span>
+		</div>
 
 		<!-- Children -->
 		<div *ngIf="isContainer" class="group-expression">
 			<div *ngFor="let child of expression.children">
 				<expression-view [expression]="child" [isRoot]="false"></expression-view>
 			</div>
-			<i (click)="addChild()" class="fa fa-plus link new-expression"></i>
+
+			<span (click)="addChild()" class="indent glyphicon glyphicon-plus"></span>
 		</div>
     </div>
 

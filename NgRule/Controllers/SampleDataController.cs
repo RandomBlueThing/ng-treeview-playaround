@@ -19,11 +19,12 @@ namespace NgRule.Controllers
 		[HttpGet("[action]/{id}")]
 		public Rule GetRule(string id)
         {
-			Task.Delay(2000).Wait();
+			Task.Delay(1000).Wait();
 
 			return new Rule()
 			{
 				Id = id,
+				Name = $"Some rule name: {DateTime.Now}",
 				Expression = new Expression("match_all")
 				{
 					Children = new[]

@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { Expression } from './expression.view';
+import { ExpressionView } from './expression.view';
 import { ProjectRoleService } from '../../services/project-role.service';
 
 @Component({

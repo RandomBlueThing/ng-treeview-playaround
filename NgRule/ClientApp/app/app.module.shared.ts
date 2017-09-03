@@ -15,10 +15,13 @@ import { ProjectRoleService } from './services/project-role.service'
 import { TreeView } from './components/tree-view/tree-view.directory';
 import { TreeViewComponent } from './components/tree-view/tree-view.component';
 
-import { Expression } from './components/expression/expression.view';
+import { ExpressionView } from './components/expression/expression.view';
 import { ExpressionComponent } from './components/expression/expression.component';
 
 import { RuleComponent } from './components/rule/rule.component';
+import { ActionDefinitionComponent } from './components/actiondefinition/action-definition.component';
+
+//import { Expression, Property, ActionDefinition, Rule } from './entities/entities'
 
 @NgModule({
     declarations: [
@@ -28,8 +31,9 @@ import { RuleComponent } from './components/rule/rule.component';
         FetchDataComponent,
         HomeComponent,
         TreeViewComponent, TreeView,
-		ExpressionComponent, Expression,
-		RuleComponent
+		ExpressionComponent, ExpressionView,
+		RuleComponent,
+		ActionDefinitionComponent
     ],
     imports: [
         CommonModule,

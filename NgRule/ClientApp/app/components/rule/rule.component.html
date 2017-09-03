@@ -1,13 +1,26 @@
-﻿<div *ngIf="_rule; else noRuleTemplate">
-	<div>
-		{{_rule.id}}
-	</div>
+﻿<h4>Rule</h4>
+
+<div *ngIf="_rule; else noRuleTemplate">
+	<div>Id: {{_rule.id}}</div>
+	<div>Name: <input [(ngModel)]="_rule.name"></div>
 	<div *ngIf="_rule.expression; else noExpressionTemplate">
+		<h4>Expression</h4>
 		<expression-view [expression]="_rule.expression" [isRoot]="true"></expression-view>
+	</div>
+
+	<div *ngIf="_rule.actions; else noActionsTemplate">
+		<h4>Actions</h4>
+		<div *ngFor="let action of _rule.actions">
+			<action-definition [action]="action"></action-definition>
+		</div>
+		<span (click)="addAction('email')" class="glyphicon glyphicon-plus">email</span>
+		<span (click)="addAction('change-category')" class="glyphicon glyphicon-plus">change-category</span>
+		<span (click)="addAction('add-property')" class="glyphicon glyphicon-plus">add-property</span>
 	</div>
 
 	<!-- Debug -->
 	<div style="background-color:lightgoldenrodyellow">
+		<h4>Debug</h4>
 		<button (click)="clear()">clear</button>
 		<button (click)="clearExpression()">clear expression</button>
 		<div><pre><small>{{_rule | json}}</small></pre></div>
@@ -17,9 +30,12 @@
 <ng-template #noRuleTemplate>
 	<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 	<span class="sr-only">Loading...</span>
-	</ng-template>
-<ng-template #noExpressionTemplate>
-	<div><a (click)="addNewExpression()">Add an expression</a>
-</div>
 </ng-template>
 
+<ng-template #noExpressionTemplate>
+	<div><a (click)="addNewExpression()">Add an expression</a></div>
+</ng-template>
+
+<ng-template #noActionsTemplate>
+	<div>@TODO: Add action</div>
+</ng-template>

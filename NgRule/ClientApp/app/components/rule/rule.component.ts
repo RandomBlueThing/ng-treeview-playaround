@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ProjectRoleService } from '../../services/project-role.service';
+import { Rule } from '../../entities/entities';
 
 @Component({
 	selector: 'rule',
@@ -17,7 +18,7 @@ export class RuleComponent {
 	ngOnInit() {
 		let id = "abcdefg-hijklmnop-qrs-tuv-wxyz";
 
-		this._projectService.getRule(id).then((res: any) => {
+		this._projectService.getRule(id).then((res: Rule) => {
 			this._rule = res;
 		}, (error) => {
 			console.log("Failed to get rule", error._body, "error");
@@ -56,6 +57,18 @@ export class RuleComponent {
 		}
 	}
 
+	addAction(type: string) {
+		if (this._rule) {
+			if (!this._rule.actions) {
+				this._rule.actions = [];
+			}
+
+			this._rule.actions.push({
+				type: type
+			});
+		}
+	}
+
 	//save() {
 	//	this._projectService.saveExpression(this._expression)
 	//		.then(() => console.log("saved"),
@@ -64,31 +77,3 @@ export class RuleComponent {
 	//}
 }
 
-interface Expression {
-	operator: string;
-	operand: string;
-	argument: string;
-	value: string;
-	isActive: boolean;
-	children: Expression[];
-}
-
-interface Property {
-	category: string;
-	name: string;
-	value: string;
-}
-
-interface ActionDefinition {
-	type: string;
-	properties?: Property[];
-}
-
-interface Rule {
-	id: string;
-	name: number;
-	temperatureF: number;
-	summary: string;
-	expression?: Expression;
-	actions?: ActionDefinition[];
-}

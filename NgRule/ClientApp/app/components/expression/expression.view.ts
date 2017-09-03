@@ -1,12 +1,13 @@
 ﻿import { Component, Input } from '@angular/core';
+import { Expression } from '../../entities/entities';
 
 @Component({
     selector: 'expression-view',
     templateUrl: './expression.view.html',
     styleUrls: ['./expression.view.css']
 })
-export class Expression {
-	@Input() expression: any;
+export class ExpressionView {
+	@Input() expression: Expression;
 	@Input() isRoot: boolean;
 
 	isMouseOverDelete: boolean;
@@ -19,7 +20,7 @@ export class Expression {
         this.expression.children.push({
             operator: "eq",
             operand: "",
-            argumant: "",
+            argument: "",
             value: "",
             isActive: true,
             children: []
