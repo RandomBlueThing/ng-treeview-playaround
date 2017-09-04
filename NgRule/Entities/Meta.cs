@@ -12,7 +12,6 @@ namespace NgRule.Entities
         public string PropertyName { get; set; }
         public bool IsRequired { get; set; }
         public string DataType { get; set; }
-
         public Option[] Options { get; set; }
     }
 

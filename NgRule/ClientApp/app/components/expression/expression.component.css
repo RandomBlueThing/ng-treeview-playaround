@@ -33,7 +33,7 @@
 
 @keyframes highlightExpressionAnimation {
 	to {
-		background-color: red;
+		background-color: lightblue;
 	}
 }
 

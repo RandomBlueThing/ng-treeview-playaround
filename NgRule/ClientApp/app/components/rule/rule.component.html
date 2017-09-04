@@ -13,21 +13,22 @@
 		<div *ngFor="let action of _rule.actions">
 			<action-definition [action]="action"></action-definition>
 		</div>
-		<span (click)="addAction('email')" class="link glyphicon glyphicon-plus">email</span>
-		<span (click)="addAction('change-category')" class="link glyphicon glyphicon-plus">change-category</span>
-		<span (click)="addAction('add-property')" class="link glyphicon glyphicon-plus">add-property</span>
+		<span *ngFor="let action of _availableActions" (click)="addAction(action)" class="availableAction glyphicon glyphicon-plus">{{action}}</span>
 	</div>
 
 	<!-- Debug -->
 	<div style="background-color:lightgoldenrodyellow; padding: 5px; margin-top: 20px">
 		<h3>Debug</h3>
-		<button (click)="clear()">clear</button>
-		<button (click)="clearExpression()">clear expression</button>
+		<div>
+			<button (click)="clear()">clear</button>
+			<button (click)="clearExpression()">clear expression</button>
+		</div>
         Rule
 		<div><pre><small>{{_rule | json}}</small></pre></div>
-        <hr/>
         Meta
         <div><pre><small>{{_meta | json}}</small></pre></div>
+		Available Actions
+		<div><pre><small>{{_availableActions}}</small></pre></div>
 	</div>
 </div>
 

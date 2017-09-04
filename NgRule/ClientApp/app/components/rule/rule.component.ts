@@ -10,7 +10,8 @@ import { Rule, Meta, Property } from '../../entities/entities';
 export class RuleComponent {
 
     _rule?: Rule;
-    _meta?: Array<Meta>;
+	_meta?: Array<Meta>;
+	_availableActions: Array<string> = [];
 
 	constructor(private _projectService: ProjectRoleService) {
 	}
@@ -21,13 +22,22 @@ export class RuleComponent {
 
         // Load meta data
         this._projectService.getMeta().then((res: Array<Meta>) => {
-            this._meta = res;
+			this._meta = res;
+
+			for (let a of this._meta.filter(i => i.type == "action")) {
+				if (!this._availableActions.find(i => i == a.source)) {
+					this._availableActions.push(a.source);
+				}
+			}
+
             // Load rule data
             this._projectService.getRule(id).then((res: Rule) => {
                 this._rule = res;
             }, (error) => {
                 console.log("Failed to get rule", error._body, "error");
-            });
+				});
+
+
         }, (error) => {
             console.log("Failed to get meta", error._body, "error");
         });

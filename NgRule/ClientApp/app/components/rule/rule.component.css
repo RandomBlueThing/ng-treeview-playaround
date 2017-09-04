@@ -1,3 +1,19 @@
 ﻿.link {
 	cursor: pointer;
 }
+
+.availableAction{
+	margin: 5px;
+	padding: 5px;
+	background-color: aliceblue;
+}
+
+	.availableAction:hover {
+		margin: 4px;
+		cursor: pointer;
+		border-width: 1px;
+		border-left: 1px solid lightgrey;
+		border-right: 1px solid lightgrey;
+		border-top: 1px solid lightgrey;
+		border-bottom: 1px solid lightgrey;
+	}
