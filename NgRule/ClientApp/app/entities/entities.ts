@@ -28,3 +28,17 @@ export interface Rule {
 	expression?: Expression;
 	actions?: ActionDefinition[];
 }
+
+export interface Option {
+    display: string;
+    value: string;
+}
+
+export interface Meta {
+    type: string;
+    source: string;
+    propertyName: string;
+    isRequired: boolean;
+    dataType: string;
+    options?: Option[];
+}

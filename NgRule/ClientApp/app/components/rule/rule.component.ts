@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ProjectRoleService } from '../../services/project-role.service';
-import { Rule } from '../../entities/entities';
+import { Rule, Meta, Property } from '../../entities/entities';
 
 @Component({
 	selector: 'rule',
@@ -9,7 +9,8 @@ import { Rule } from '../../entities/entities';
 })
 export class RuleComponent {
 
-	_rule?: Rule;
+    _rule?: Rule;
+    _meta?: Array<Meta>;
 
 	constructor(private _projectService: ProjectRoleService) {
 	}
@@ -18,11 +19,18 @@ export class RuleComponent {
 	ngOnInit() {
 		let id = "abcdefg-hijklmnop-qrs-tuv-wxyz";
 
-		this._projectService.getRule(id).then((res: Rule) => {
-			this._rule = res;
-		}, (error) => {
-			console.log("Failed to get rule", error._body, "error");
-		});
+        // Load meta data
+        this._projectService.getMeta().then((res: Array<Meta>) => {
+            this._meta = res;
+            // Load rule data
+            this._projectService.getRule(id).then((res: Rule) => {
+                this._rule = res;
+            }, (error) => {
+                console.log("Failed to get rule", error._body, "error");
+            });
+        }, (error) => {
+            console.log("Failed to get meta", error._body, "error");
+        });
 	}
 
 	clear() {
@@ -35,7 +43,7 @@ export class RuleComponent {
 		}
 	}
 
-	addNewExpression() {
+	createRootExpression() {
 		if (this._rule) {
 			this._rule.expression = {
 				operator: "match_all",
@@ -61,12 +69,26 @@ export class RuleComponent {
 		if (this._rule) {
 			if (!this._rule.actions) {
 				this._rule.actions = [];
-			}
+            }
 
-			this._rule.actions.push({
-				type: type,
-				isActive: true
-			});
+            if (this._meta) {
+                let action = {
+                    type: type,
+                    isActive: true,
+                    properties: Array<Property>()
+                };
+
+                this._meta.filter(z => z.type == "action" && z.source == type).forEach(i => {
+                    action.properties.push({
+                        category: "",
+                        name: i.propertyName,
+                        value: ""
+                    });
+                });
+
+                this._rule.actions.push(action);
+            }
+
 		}
 	}
 

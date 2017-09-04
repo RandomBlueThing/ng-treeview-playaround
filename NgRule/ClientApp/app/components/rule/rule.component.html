@@ -23,7 +23,11 @@
 		<h3>Debug</h3>
 		<button (click)="clear()">clear</button>
 		<button (click)="clearExpression()">clear expression</button>
+        Rule
 		<div><pre><small>{{_rule | json}}</small></pre></div>
+        <hr/>
+        Meta
+        <div><pre><small>{{_meta | json}}</small></pre></div>
 	</div>
 </div>
 
@@ -32,7 +36,7 @@
 </ng-template>
 
 <ng-template #noExpressionTemplate>
-	<div><a (click)="addNewExpression()">Add an expression</a></div>
+	<div><a (click)="createRootExpression()">Add an expression</a></div>
 </ng-template>
 
 <ng-template #noActionsTemplate>

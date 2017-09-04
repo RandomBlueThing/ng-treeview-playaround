@@ -92,6 +92,67 @@ namespace NgRule.Controllers
         }
 
         [HttpGet("[action]")]
+        public IEnumerable<Meta> MetaData()
+        {
+            return new[]
+            {
+                new Meta()
+                {
+                    Type = "action",
+                    Source = "email",
+                    PropertyName = "to",
+                    IsRequired = true,
+                    Options = new[]{ new Option(null, @".*@.*") }
+                },
+                new Meta()
+                {
+                    Type = "action",
+                    Source = "email",
+                    PropertyName = "cc",
+                    IsRequired = false,
+                    Options = new[]{ new Option(null, @".*@.*") }
+                },
+                new Meta()
+                {
+                    Type = "action",
+                    Source = "email",
+                    PropertyName = "bcc",
+                    IsRequired = false,
+                    Options = new[]{ new Option(null, @".*@.*") }
+                },
+
+                new Meta()
+                {
+                    Type = "action",
+                    Source = "change-category",
+                    PropertyName = "category",
+                    IsRequired = true,
+                    Options = new[]
+                    {
+                        new Option("Information", "information"),
+                        new Option("Error", "error"),
+                        new Option("Debug", "debug")
+                    }
+                },
+
+                new Meta()
+                {
+                    Type = "action",
+                    Source = "add-property",
+                    PropertyName = "name",
+                    IsRequired = true
+                },
+                new Meta()
+                {
+                    Type = "action",
+                    Source = "add-property",
+                    PropertyName = "value",
+                    IsRequired = true
+                }
+            };
+        }
+
+        [HttpGet("[action]")]
         public IEnumerable<Menu> MenuData()
         {
             return new[] {
