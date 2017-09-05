@@ -1,8 +1,17 @@
 ﻿<h3>Rule</h3>
 
 <div *ngIf="_rule; else noRuleTemplate">
-	<div>Id: {{_rule.id}}</div>
-	<div>Name: <input [(ngModel)]="_rule.name"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-1">Id</div>
+			<div class="col-sm-11">{{_rule.id}}</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1">Name</div>
+			<div class="col-sm-11"><input [(ngModel)]="_rule.name"></div>
+		</div>
+	</div>
+
 	<div *ngIf="_rule.expression; else noExpressionTemplate">
 		<h3>Expression</h3>
 		<expression-view [expression]="_rule.expression" [isRoot]="true"></expression-view>
@@ -13,7 +22,7 @@
 		<div *ngFor="let action of _rule.actions">
 			<action-definition [action]="action" [metaData]="getActionMetaData(action)"></action-definition>
 		</div>
-		<span *ngFor="let action of _metaData.actionMetaData" (click)="addAction(action)" class="availableAction glyphicon glyphicon-plus">{{action.type}}</span>
+		<button type="button" *ngFor="let action of _metaData.actionMetaData" (click)="addAction(action)" class="btn btn-default availableAction">{{action.type}}</button>
 	</div>
 
 	<!-- Debug -->

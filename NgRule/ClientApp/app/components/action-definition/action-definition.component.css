@@ -1,10 +1,15 @@
-﻿.action {
-	margin: 5px;
-	padding: 5px;
-	border: 1px solid lightgrey;
+﻿.action {	
 }
 
 .delete {
 	cursor: pointer;
 	float: right;
+}
+
+.property-name {
+	text-align: right;
+}
+
+.property-value {
+	padding: 1px;
 }

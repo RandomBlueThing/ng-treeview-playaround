@@ -50,22 +50,26 @@ export class ExpressionComponent {
 		this.isMouseOverDelete = false;
 	}
 
+	//@TODO: From MetaData
     expressionOperators: Array<string> = [
         "eq",
 		"not-eq",
 		"regex"
     ];
 
+	//@TODO: From MetaData
 	groupOperators: Array<string> = [
 		"match_all",
 		"match_any"
 	];
 
 
+	//@TODO: From MetaData
     operands: Array<string> = [
         "Category",
         "Summary",
         "Source",
+		"Timestamp",
         "Property"
     ];
 

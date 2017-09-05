@@ -13,7 +13,7 @@ namespace NgRule.Controllers
 		[HttpGet("[action]/{id}")]
 		public Rule GetRule(string id)
         {
-			Task.Delay(1000).Wait();
+			//Task.Delay(1000).Wait();
 
 			return new Rule()
 			{
