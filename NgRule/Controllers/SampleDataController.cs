@@ -42,14 +42,16 @@ namespace NgRule.Controllers
 					{
 						Properties = new[]
 						{
-							new Property("to", "pj@theswamp.co.uk")
-						}
-					},
+							new Property("to", "pj@theswamp.co.uk"),
+                            new Property("cc", ""),
+                            new Property("bcc", ""),
+                        }
+                    },
 					new ActionDefinition("change-category")
 					{
 						Properties = new[]
 						{
-							new Property("category", "Information")
+							new Property("category", "inf")
 						}
 					}
 				}
@@ -66,7 +68,7 @@ namespace NgRule.Controllers
                 {
                     new ActionMetaData()
                     {
-                        Type = "send-email",
+                        Type = "email",
                         Properties = new[]
                         {
                             new MetaDataCapture()

@@ -11,7 +11,7 @@
 	<div *ngIf="_rule.actions; else noActionsTemplate">
 		<h3>Actions</h3>
 		<div *ngFor="let action of _rule.actions">
-			<action-definition [action]="action"></action-definition>
+			<action-definition [action]="action" [metaData]="getActionMetaData(action)"></action-definition>
 		</div>
 		<span *ngFor="let action of _metaData.actionMetaData" (click)="addAction(action)" class="availableAction glyphicon glyphicon-plus">{{action.type}}</span>
 	</div>

@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ProjectRoleService } from '../../services/project-role.service';
-import { Rule, Property, MetaData, ActionMetaData, ExpressionMetaData } from '../../entities/entities';
+import { Rule, Property, ActionDefinition, MetaData, ActionMetaData, ExpressionMetaData } from '../../entities/entities';
 
 @Component({
 	selector: 'rule',
@@ -74,7 +74,6 @@ export class RuleComponent {
                 properties: Array<Property>()
             };
 
-            // I'm thinking that 'action' here should be it's own component
             meta.properties.forEach(p => {
                 action.properties.push({
                     name: p.name,
@@ -91,6 +90,9 @@ export class RuleComponent {
         }
     }
 
+    getActionMetaData(def: ActionDefinition) {
+        return this._metaData.actionMetaData.find(a => a.type == def.type);
+    }
 	//save() {
 	//	this._projectService.saveExpression(this._expression)
 	//		.then(() => console.log("saved"),

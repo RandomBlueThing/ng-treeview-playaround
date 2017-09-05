@@ -53,6 +53,6 @@ export interface ExpressionMetaData {
 }
 
 export interface MetaData{
-    actionMetaData: ActionMetaData;
-    expressionMetaData: ExpressionMetaData;
+    actionMetaData: ActionMetaData[];
+    expressionMetaData: ExpressionMetaData[];
 }

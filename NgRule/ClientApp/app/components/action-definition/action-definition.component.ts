@@ -1,5 +1,5 @@
 ﻿import { Component, Input } from '@angular/core';
-import { ActionDefinition } from '../../entities/entities';
+import { ActionDefinition, ActionMetaData, Property } from '../../entities/entities';
 
 @Component({
 	selector: 'action-definition',
@@ -8,9 +8,14 @@ import { ActionDefinition } from '../../entities/entities';
 })
 export class ActionDefinitionComponent {
 	@Input() action: ActionDefinition;
+    @Input() metaData: ActionMetaData;
 
 	deleteAction() {
 		this.action.isActive = false;
-	}
+    }
+
+    getPropertyMetaData(property: Property) {
+        return this.metaData.properties.find(p => p.name == property.name);
+    }
 }
 

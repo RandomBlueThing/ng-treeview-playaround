@@ -5,7 +5,15 @@
 	</div>
 	<div *ngIf="action.properties">
 		<div *ngFor="let property of action.properties">
-			{{property.name}}: <input [(ngModel)]="property.value">
+			{{property.name}}: 
+            <span [ngSwitch]="getPropertyMetaData(property).dataType">
+                <select *ngSwitchCase="'select'" [(ngModel)]="property.value">
+                    <option *ngFor="let op of getPropertyMetaData(property).options" [value]="op.value">{{op.display}}</option>
+                </select>
+                <input *ngSwitchDefault [(ngModel)]="property.value">
+            </span>            
 		</div>
 	</div>
+    <div><pre><small>{{metaData | json}}</small></pre></div>
+
 </div>
