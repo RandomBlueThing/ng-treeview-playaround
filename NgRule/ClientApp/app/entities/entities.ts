@@ -34,11 +34,25 @@ export interface Option {
     value: string;
 }
 
-export interface Meta {
-    type: string;
-    source: string;
-    propertyName: string;
+export interface MetaDataCapture {
+    name: string;
     isRequired: boolean;
     dataType: string;
-    options?: Option[];
+    options: Option[];
+}
+
+export interface ActionMetaData {
+    type: string;
+    properties: MetaDataCapture[];
+}
+
+export interface ExpressionMetaData {
+    operand: string;
+    dataType: string;
+    options: Option[];
+}
+
+export interface MetaData{
+    actionMetaData: ActionMetaData;
+    expressionMetaData: ExpressionMetaData;
 }

@@ -23,23 +23,6 @@ export class ProjectRoleService {
     }
 
 
-    getMenuDetails() {
-
-        return new Promise((resolve, reject) => {
-            this._http.get(this._baseUrl + 'api/SampleData/MenuData')
-                .map(res => res.json())
-                .catch((error: any) => {
-                    console.error(error);
-                    reject(error);
-                    return Observable.throw(error.json().error || 'Server error');
-                })
-                .subscribe((data) => {
-                    resolve(data);
-                });
-        });
-    }
-
-
 	getRule(id: string) {
 
 		return new Promise((resolve, reject) => {
@@ -57,10 +40,26 @@ export class ProjectRoleService {
 	}
 
 
-    getExpression() {
+    //saveExpression(expression: any) {
+    //    let body = JSON.stringify(expression);
 
+    //    return new Promise((resolve, reject) => {
+    //        this._http.post(this._baseUrl + 'api/SampleData/ExpressionData', body, this.options)
+    //            .catch((error: any) => {
+    //                console.error(error);
+    //                reject(error);
+    //                return Observable.throw(error.json().error || 'Server error');
+    //            })
+    //            .subscribe((data) => {
+    //                resolve(data);
+    //            });
+    //    });
+    //}
+
+
+    getMetaData() {
         return new Promise((resolve, reject) => {
-            this._http.get(this._baseUrl + 'api/SampleData/ExpressionData')
+            this._http.get(this._baseUrl + 'api/SampleData/GetMetaData')
                 .map(res => res.json())
                 .catch((error: any) => {
                     console.error(error);
@@ -73,35 +72,4 @@ export class ProjectRoleService {
         });
     }
 
-    saveExpression(expression: any) {
-        let body = JSON.stringify(expression);
-
-        return new Promise((resolve, reject) => {
-            this._http.post(this._baseUrl + 'api/SampleData/ExpressionData', body, this.options)
-                .catch((error: any) => {
-                    console.error(error);
-                    reject(error);
-                    return Observable.throw(error.json().error || 'Server error');
-                })
-                .subscribe((data) => {
-                    resolve(data);
-                });
-        });
-    }
-
-
-    getMeta() {
-        return new Promise((resolve, reject) => {
-            this._http.get(this._baseUrl + 'api/SampleData/MetaData')
-                .map(res => res.json())
-                .catch((error: any) => {
-                    console.error(error);
-                    reject(error);
-                    return Observable.throw(error.json().error || 'Server error');
-                })
-                .subscribe((data) => {
-                    resolve(data);
-                });
-        });
-    }
 }  

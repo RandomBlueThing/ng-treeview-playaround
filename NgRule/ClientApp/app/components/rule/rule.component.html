@@ -13,7 +13,7 @@
 		<div *ngFor="let action of _rule.actions">
 			<action-definition [action]="action"></action-definition>
 		</div>
-		<span *ngFor="let action of _availableActions" (click)="addAction(action)" class="availableAction glyphicon glyphicon-plus">{{action}}</span>
+		<span *ngFor="let action of _metaData.actionMetaData" (click)="addAction(action)" class="availableAction glyphicon glyphicon-plus">{{action.type}}</span>
 	</div>
 
 	<!-- Debug -->
@@ -26,9 +26,7 @@
         Rule
 		<div><pre><small>{{_rule | json}}</small></pre></div>
         Meta
-        <div><pre><small>{{_meta | json}}</small></pre></div>
-		Available Actions
-		<div><pre><small>{{_availableActions}}</small></pre></div>
+        <div><pre><small>{{_metaData | json}}</small></pre></div>
 	</div>
 </div>
 

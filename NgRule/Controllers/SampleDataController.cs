@@ -10,13 +10,6 @@ namespace NgRule.Controllers
 	[Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-
-
 		[HttpGet("[action]/{id}")]
 		public Rule GetRule(string id)
         {
@@ -63,146 +56,113 @@ namespace NgRule.Controllers
 			};
         }
 
+
         [HttpGet("[action]")]
-        public Expression ExpressionData()
+        public MetaData GetMetaData()
         {
-            return new Expression("match_all")
+            return new MetaData
             {
-                Children = new[]
+                ActionMetaData = new[]
                 {
-                    new Expression("eq", "Category", null, "info"),
-                    new Expression("eq", "Summary", null, "test"),
-                    new Expression("match_any")
+                    new ActionMetaData()
                     {
-                        Children = new[]
+                        Type = "send-email",
+                        Properties = new[]
                         {
-                            new Expression("eq", "Property", "prop-one", "1"),
-                            new Expression("eq", "Property", "prop-two", "2")
+                            new MetaDataCapture()
+                            {
+                                Name = "to",
+                                IsRequired = true,
+                                Options = new[]
+                                {
+                                    new Option(null, ".*@.*")
+                                }
+                            },
+                            new MetaDataCapture()
+                            {
+                                Name = "cc",
+                                IsRequired = false,
+                                Options = new[]
+                                {
+                                    new Option(null, ".*@.*")
+                                }
+                            },
+                            new MetaDataCapture()
+                            {
+                                Name = "bcc",
+                                IsRequired = false,
+                                Options = new[]
+                                {
+                                    new Option(null, ".*@.*")
+                                }
+                            },
                         }
                     },
-                    new Expression("eq", "Property", "prop-three", "3")
-                }
-            };
-        }
 
-        [HttpPost("[action]")]
-        public void ExpressionData([FromBody] Expression expression)
-        {
-
-        }
-
-        [HttpGet("[action]")]
-        public IEnumerable<Meta> MetaData()
-        {
-            return new[]
-            {
-                new Meta()
-                {
-                    Type = "action",
-                    Source = "email",
-                    PropertyName = "to",
-                    IsRequired = true,
-                    Options = new[]{ new Option(null, @".*@.*") }
-                },
-                new Meta()
-                {
-                    Type = "action",
-                    Source = "email",
-                    PropertyName = "cc",
-                    IsRequired = false,
-                    Options = new[]{ new Option(null, @".*@.*") }
-                },
-                new Meta()
-                {
-                    Type = "action",
-                    Source = "email",
-                    PropertyName = "bcc",
-                    IsRequired = false,
-                    Options = new[]{ new Option(null, @".*@.*") }
-                },
-
-                new Meta()
-                {
-                    Type = "action",
-                    Source = "change-category",
-                    PropertyName = "category",
-                    IsRequired = true,
-                    Options = new[]
+                    new ActionMetaData()
                     {
-                        new Option("Information", "information"),
-                        new Option("Error", "error"),
-                        new Option("Debug", "debug")
-                    }
-                },
-
-                new Meta()
-                {
-                    Type = "action",
-                    Source = "add-property",
-                    PropertyName = "name",
-                    IsRequired = true
-                },
-                new Meta()
-                {
-                    Type = "action",
-                    Source = "add-property",
-                    PropertyName = "value",
-                    IsRequired = true
-                }
-            };
-        }
-
-        [HttpGet("[action]")]
-        public IEnumerable<Menu> MenuData()
-        {
-            return new[] {
-                new Menu("one")
-                {
-                    Children = new List<Menu>()
-                    {
-                        new Menu("one.01"),
-                        new Menu("one.02")
+                        Type = "change-category",
+                        Properties = new[]
                         {
-                            Children = new List<Menu>()
+                            new MetaDataCapture()
                             {
-                                new Menu("one.02.01")
+                                Name = "category",
+                                IsRequired = true,
+                                DataType = "select",
+                                Options = new[]
                                 {
-                                    Children = new List<Menu>()
-                                    {
-                                        new Menu("one.02.01.01")
-                                    }
-                                },
-                                new Menu("one.02.02"),
+                                    new Option("Information", "inf"),
+                                    new Option("Error", "err"),
+                                    new Option("Debug", "dbg")
+                                }
+                            }
+                        }
+                    },
+
+                    new ActionMetaData()
+                    {
+                        Type = "add-property",
+                        Properties = new[]
+                        {
+                            new MetaDataCapture()
+                            {
+                                Name = "category",
+                                IsRequired = false,
+                            },
+                            new MetaDataCapture()
+                            {
+                                Name = "name",
+                                IsRequired = true,
+                            },
+                            new MetaDataCapture()
+                            {
+                                Name = "value",
+                                IsRequired = true,
                             }
                         }
                     }
+
                 },
-                new Menu("two")
+                ExpressionMetaData = new[]
                 {
-                    Children = new List<Menu>()
+                    new ExpressionMetaData()
                     {
-                        new Menu("two.01"),
-                        new Menu("two.02"),
+                        Operand = "Category",
+                        DataType = "select",
+                        Options = new[]
+                        {
+                            new Option("Information", "information"),
+                            new Option("Error", "error"),
+                            new Option("Debug", "debug")
+                        }
+                    },
+                    new ExpressionMetaData()
+                    {
+                        Operand = "Timestamp",
+                        DataType = "datetime"
                     }
                 }
             };
         }
-
     }
-
-	public class WeatherForecast
-	{
-		public string DateFormatted { get; set; }
-		public int TemperatureC { get; set; }
-		public string Summary { get; set; }
-
-		public int TemperatureF
-		{
-			get
-			{
-				return 32 + (int)(TemperatureC / 0.5556);
-			}
-		}
-	}
-
 }

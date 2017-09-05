@@ -1,6 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import { ProjectRoleService } from '../../services/project-role.service';
-import { Rule, Meta, Property } from '../../entities/entities';
+import { Rule, Property, MetaData, ActionMetaData, ExpressionMetaData } from '../../entities/entities';
 
 @Component({
 	selector: 'rule',
@@ -10,8 +10,7 @@ import { Rule, Meta, Property } from '../../entities/entities';
 export class RuleComponent {
 
     _rule?: Rule;
-	_meta?: Array<Meta>;
-	_availableActions: Array<string> = [];
+    _metaData: MetaData;
 
 	constructor(private _projectService: ProjectRoleService) {
 	}
@@ -20,27 +19,19 @@ export class RuleComponent {
 	ngOnInit() {
 		let id = "abcdefg-hijklmnop-qrs-tuv-wxyz";
 
-        // Load meta data
-        this._projectService.getMeta().then((res: Array<Meta>) => {
-			this._meta = res;
-
-			for (let a of this._meta.filter(i => i.type == "action")) {
-				if (!this._availableActions.find(i => i == a.source)) {
-					this._availableActions.push(a.source);
-				}
-			}
+        this._projectService.getMetaData().then((res: MetaData) => {
+            this._metaData = res;
 
             // Load rule data
             this._projectService.getRule(id).then((res: Rule) => {
                 this._rule = res;
             }, (error) => {
                 console.log("Failed to get rule", error._body, "error");
-				});
-
-
+            });
         }, (error) => {
             console.log("Failed to get meta", error._body, "error");
         });
+
 	}
 
 	clear() {
@@ -75,32 +66,30 @@ export class RuleComponent {
 		}
 	}
 
-	addAction(type: string) {
-		if (this._rule) {
-			if (!this._rule.actions) {
-				this._rule.actions = [];
-            }
+    addAction(meta: ActionMetaData) {
+        if (this._rule) {
+            let action = {
+                type: meta.type,
+                isActive: true,
+                properties: Array<Property>()
+            };
 
-            if (this._meta) {
-                let action = {
-                    type: type,
-                    isActive: true,
-                    properties: Array<Property>()
-                };
-
-                this._meta.filter(z => z.type == "action" && z.source == type).forEach(i => {
-                    action.properties.push({
-                        category: "",
-                        name: i.propertyName,
-                        value: ""
-                    });
+            // I'm thinking that 'action' here should be it's own component
+            meta.properties.forEach(p => {
+                action.properties.push({
+                    name: p.name,
+                    category: "",
+                    value: ""
                 });
+            });
 
-                this._rule.actions.push(action);
+            if (!this._rule.actions) {
+                this._rule.actions = [];
             }
 
-		}
-	}
+            this._rule.actions.push(action);
+        }
+    }
 
 	//save() {
 	//	this._projectService.saveExpression(this._expression)
