@@ -10,10 +10,11 @@
                 <select *ngSwitchCase="'select'" [(ngModel)]="property.value">
                     <option *ngFor="let op of getPropertyMetaData(property).options" [value]="op.value">{{op.display}}</option>
                 </select>
+                <label *ngSwitchCase="'datetime'">@TODO: DateTime picker</label>
                 <input *ngSwitchDefault [(ngModel)]="property.value">
             </span>            
 		</div>
 	</div>
-    <div><pre><small>{{metaData | json}}</small></pre></div>
+    <!--<div><pre><small>{{metaData | json}}</small></pre></div>-->
 
 </div>
